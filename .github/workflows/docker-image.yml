@@ -7,10 +7,15 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  build-image:
     runs-on: self-hosted
-
     steps:
       - uses: actions/checkout@v4
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag docker-actions:action
+  run-container:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Container
+        run: docker run --rm docker-actions:action
